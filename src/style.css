@@ -16,9 +16,12 @@
 	 position: relative;
 	 width: 1200px;
 	 height: 800px;
+    display: flex; /* Add flex display to container */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
 }
  .mandala {
-	 position: absolute;
+	 position: relative;
 	 top: 0;
 	 left: 25px;
 	 width: 800px;
@@ -26,14 +29,16 @@
 	 background-color: white;
 	 border-radius: 50%;
 	 box-shadow: 5px 5px 10px #bbb;
+    max-width: 95vw; /* Limit width to viewport width */
+    max-height: 95vw; /* Keep aspect ratio, limit height to viewport width */
 }
  .mandala .base {
 	 pointer-events: none;
 	 position: absolute;
 	 left: 0;
 	 top: 0;
-	 width: 800px;
-	 height: 800px;
+	 width: 100%; /* Use 100% to fill parent */
+	 height: 100%; /* Use 100% to fill parent */
 	 border-radius: 50%;
 	 opacity: 0;
 	 transition: opacity 0.5s;
@@ -46,8 +51,8 @@
 	 position: absolute;
 	 left: 0;
 	 top: 0;
-	 width: 800px;
-	 height: 800px;
+	 width: 100%; /* Use 100% to fill parent */
+	 height: 100%; /* Use 100% to fill parent */
 	 border-radius: 50%;
 }
  .controllers {
@@ -60,6 +65,7 @@
 	 border-radius: 4px;
 	 width: 1200px;
 	 user-select: none;
+    margin-top: 1em; /* Add some top margin */
 }
  .controllers .control {
 	 font-size: 1.25em;
@@ -69,10 +75,11 @@
 	 border-bottom: 1px solid #fff;
 }
  .controllers .input {
-	 font-family: 'Yellowtail', cursive;
+	 font-family: 'Yellowtail', sans-serif; /* Changed to sans-serif for normal style */
 	 width: 100%;
 	 font-size: 1em;
 	 text-align: center;
+	 font-style: normal; /* explicitly set to normal */
 }
  .controllers .color {
 	 font-size: 1em;
@@ -82,6 +89,7 @@
 }
  .controllers label {
 	 display: block;
+	 font-style: normal; /* explicitly set to normal */
 }
  .controllers label + label {
 	 margin-top: 0.5em;
@@ -92,12 +100,13 @@
 }
  .controllers .buttons button {
 	 font-size: 1em;
-	 font-family: 'Yellowtail', cursive;
+	 font-family: 'Yellowtail', sans-serif; /* Changed to sans-serif for normal style */
 	 background: none;
 	 border: 1px solid #fff;
 	 display: inline-block;
 	 padding: 0.5em;
 	 margin: 0.25em;
+	 font-style: normal; /* explicitly set to normal */
 }
  @media (max-width: 1200px) {
 	 .container {
