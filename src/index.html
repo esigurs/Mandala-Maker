@@ -8,12 +8,27 @@
     <!-- Open Graph meta tags for WhatsApp preview -->
     <meta property="og:title" content="Mandala Maker - Create Beautiful Mandalas Online">
     <meta property="og:description" content="Design your own unique mandalas with this online tool. Customize parts, colors, and line width.">
-    <meta property="og:image" content="src/mandala-maker.png">
+    <meta property="og:image" content=""> <!-- Leave content empty initially -->
     <meta property="og:url" content="YOUR_WEBSITE_URL">
     <meta property="og:type" content="website">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="style.css" rel="stylesheet" type="text/css" />
+
+    <script>
+      // Dynamically set the og:image content URL
+      document.addEventListener('DOMContentLoaded', function() {
+        var baseUrl = window.location.origin; // Gets the base URL of the website (e.g., http://localhost:5173 or https://yourdomain.com)
+        var imagePath = '/src/mandala-maker.png'; // Path to your image relative to the website root
+        var imageUrl = baseUrl + imagePath;
+
+        var ogImageMeta = document.querySelector('meta[property="og:image"]');
+        if (ogImageMeta) {
+          ogImageMeta.setAttribute('content', imageUrl);
+        }
+      });
+    </script>
+
   </head>
   <body>
     <div class="container">
