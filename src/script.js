@@ -36,6 +36,7 @@ ctx.fillStyle = "#f00";
 baseCTX.lineWidth = 2;
 baseCTX.strokeStyle = "rgba(0, 0, 0, 0.1)";
 
+// Function to get X, Y coordinates from mouse or touch event
 function getXY(e) {
     rect = draw.getBoundingClientRect();
     let clientX, clientY;
@@ -54,90 +55,81 @@ function getXY(e) {
     lastDistance = Math.sqrt(Math.pow(lastY - 512, 2) + Math.pow(lastX - 512, 2));
 }
 
+// Event listeners for mouse and touch interaction
+document.addEventListener('mousedown', getXY);
+document.addEventListener('touchstart', getXY);
 
-document.addEventListener('mousedown', function(e) {
-    getXY(e);
-});
-document.addEventListener('touchstart', function(e) {
-    getXY(e);
-});
-
-document.addEventListener('mouseup', function(e) {
-    rect = false;
-});
-document.addEventListener('touchend', function(e) {
-    rect = false;
-});
+document.addEventListener('mouseup', function() { rect = false; });
+document.addEventListener('touchend', function() { rect = false; });
 
 draw.addEventListener('mousemove', drawCanvas);
 draw.addEventListener('touchmove', drawCanvas);
 
+// Input event listener for parts slider
 _('[name="parts"]').addEventListener('input', function(e) {
-    if (e.target.value < 2) { return false; }
-    if (e.target.value > 24) { return false; }
-    if ((e.target.value/2) != Math.round(e.target.value/2)) { return false; }
-    parts = parseInt(e.target.value, 10);
-    _('#partsValue').innerText = parts;
-    drawParts();
+    const value = parseInt(e.target.value, 10);
+    if (value < 2 || value > 24 || (value % 2 !== 0)) return; // Input validation
+    parts = value;
+    _('#partsValue').innerText = parts; // Update displayed value
+    drawParts(); // Redraw parts guide
 });
 
+// Input event listener for line width slider
 _('[name="width"]').addEventListener('input', function(e) {
-    if (e.target.value < 1) { return false; }
-    if (e.target.value > 10) { return false; }
-    lineWidth = parseInt(e.target.value, 10);
-    _('#lineWidthValue').innerText = lineWidth;
-    ctx.lineWidth = lineWidth;
+    const value = parseInt(e.target.value, 10);
+    if (value < 1 || value > 10) return; // Input validation
+    lineWidth = value;
+    _('#lineWidthValue').innerText = lineWidth; // Update displayed value
+    ctx.lineWidth = lineWidth; // Set canvas line width
 });
 
+// Change event listener for color picker
 _('[name="color"]').addEventListener('change', function(e) {
-    ctx.strokeStyle = e.target.value;
-    ctx.fillStyle = e.target.value;
+    ctx.strokeStyle = e.target.value; // Set drawing color
+    ctx.fillStyle = e.target.value; // Set fill color for circles
 });
 
+// Initialization: clear canvas and draw initial parts
 clearCanvas();
 drawParts();
 
+// Function to clear the drawing canvas
 function clearCanvas() {
-    let lastFllStyle = ctx.fillStyle
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, cwidth, cheight);
-    ctx.fillStyle = lastFllStyle;
+    ctx.fillStyle = "#ffffff"; // Set fill color to white
+    ctx.fillRect(0, 0, cwidth, cheight); // Fill canvas with white
 }
 
+// Function to draw the base mandala parts guide
 function drawParts() {
+    baseCTX.clearRect(0, 0, cwidth, cheight); // Clear base canvas
 
-    baseCTX.clearRect(0, 0, cwidth, cheight);
+    // Draw concentric circles
+    [128, 256, 384].forEach(radius => {
+        baseCTX.beginPath();
+        baseCTX.arc(512, 512, radius, 0, 2 * Math.PI);
+        baseCTX.stroke();
+    });
 
-    baseCTX.beginPath();
-    baseCTX.arc(512, 512, 128, 0, 2 * Math.PI);
-    baseCTX.stroke();
-
-    baseCTX.beginPath();
-    baseCTX.arc(512, 512, 256, 0, 2 * Math.PI);
-    baseCTX.stroke();
-
-    baseCTX.beginPath();
-    baseCTX.arc(512, 512, 384, 0, 2 * Math.PI);
-    baseCTX.stroke();
-
+    // Draw lines for parts division
     for (let i = 0; i < parts; i++) {
-
-        let thisAngle = 4 / parts * i
-        let thisX = 512 + (512 * Math.sin(thisAngle * (Math.PI / 2)));
-        let thisY = 512 + (512 * Math.sin((thisAngle - 1) * (Math.PI / 2)));
+        let angle = (4 / parts * i);
+        let x = 512 + (512 * Math.sin(angle * (Math.PI / 2)));
+        let y = 512 + (512 * Math.sin((angle - 1) * (Math.PI / 2)));
 
         baseCTX.beginPath();
         baseCTX.moveTo(512, 512);
-        baseCTX.lineTo(thisX,thisY);
+        baseCTX.lineTo(x, y);
         baseCTX.stroke();
     }
 }
 
+// Function to draw on the canvas based on mouse/touch move
 function drawCanvas(e) {
-    if (!rect) { return false; }
+    if (!rect) return; // Exit if not drawing (mouse/touch not down)
 
     let thisX, thisY;
 
+    // Get current mouse/touch coordinates
     if (e.touches && e.touches.length > 0) {
         let touch = e.touches[0];
         rect = draw.getBoundingClientRect();
@@ -148,25 +140,20 @@ function drawCanvas(e) {
         thisX = (e.clientX - rect.x) / rect.width * 1024;
         thisY = (e.clientY - rect.y) / rect.width * 1024;
     } else {
-        return;
+        return; // Exit if event type is not recognized
     }
-
 
     let thisAngle = (((Math.atan2(thisY - 512, thisX - 512) * 180 / Math.PI) + 450) % 360) / 90;
     let thisDistance = Math.sqrt(Math.pow(thisY - 512, 2) + Math.pow(thisX - 512, 2));
 
+    // Draw mirrored parts
     for (let i = 0; i < parts; i++) {
+        let newAngle1, newAngle2;
 
-        let newAngle1;
-        let newAngle2;
-
-        if (mirror && ((i/2) != Math.round(i/2))) {
-
-            newAngle1 = ((4-thisAngle) - ((4 / parts) * (i-1)));
-            newAngle2 = ((4-lastAngle) - ((4 / parts) * (i-1)));
-
+        if (mirror && ((i % 2) !== 0)) { // Use modulo operator for even/odd check
+            newAngle1 = ((4 - thisAngle) - ((4 / parts) * (i - 1)));
+            newAngle2 = ((4 - lastAngle) - ((4 / parts) * (i - 1)));
         } else {
-
             newAngle1 = (thisAngle + ((4 / parts) * i));
             newAngle2 = (lastAngle + ((4 / parts) * i));
         }
@@ -177,33 +164,34 @@ function drawCanvas(e) {
         let dX = 512 + (lastDistance * Math.sin(newAngle2 * (Math.PI / 2)));
         let dY = 512 + (lastDistance * Math.sin((newAngle2 - 1) * (Math.PI / 2)));
 
+        // Draw circle for smoother lines
         ctx.beginPath();
-        ctx.arc(cX, cY, (lineWidth-1)/2, 0, 2 * Math.PI);
+        ctx.arc(cX, cY, (lineWidth - 1) / 2, 0, 2 * Math.PI);
         ctx.fill();
 
+        // Draw line segment
         ctx.beginPath();
         ctx.moveTo(cX, cY);
         ctx.lineTo(dX, dY);
         ctx.stroke();
     }
 
-    lastAngle = thisAngle;
-    lastDistance = thisDistance;
+    lastAngle = thisAngle; // Update last angle for line drawing
+    lastDistance = thisDistance; // Update last distance for line drawing
 }
 
+// Function to toggle grid visibility
 function setGrid(e) {
-    if (e.checked) {
-        _('.base').classList.add('show');
-    } else {
-        _('.base').classList.remove('show');
-    }
+    _('.base').classList.toggle('show', e.checked); // Use toggle with condition for cleaner code
 }
 
+// Function to toggle mirrored drawing
 function setMirrored(e) {
     mirror = e.checked;
 }
 
-function download(){
+// Function to download the mandala as JPEG
+function download() {
     let link = document.createElement('a');
     link.setAttribute('download', 'mandala.jpeg');
     link.setAttribute('href', draw.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream"));

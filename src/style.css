@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
  * {
 	 padding: 0;
 	 margin: 0 auto;
 	 box-sizing: border-box;
 }
  body {
-	 font-family: 'Yellowtail', cursive;
+	 font-family: 'Roboto', sans-serif; /* Default font is now Roboto */
 	 background-color: #ddd;
 	 min-height: 100vh;
 	 display: flex;
@@ -68,12 +68,25 @@
 	 padding: 1em;
 	 border-bottom: 1px solid #fff;
 }
+ .controllers label {
+  font-family: 'Roboto', sans-serif; /* Roboto for labels */
+	 display: block;
+	 font-style: normal; /* explicitly set to normal */
+}
+ .controllers .valueDisplay {
+  font-family: 'Roboto', sans-serif; /* Roboto for value displays */
+  display: block;
+  text-align: center;
+  margin-bottom: 0.5em;
+  font-size: 1em;
+  font-style: normal;
+}
  .controllers .input {
-	 font-family: 'Yellowtail', sans-serif; /* Changed to sans-serif for normal style */
+	 font-family: sans-serif; /* Input values remain sans-serif, can be Roboto if preferred */
 	 width: 100%;
 	 font-size: 1em;
 	 text-align: center;
-	 font-style: normal; /* explicitly set to normal */
+	 font-style: normal;
 }
  .controllers .color {
 	 font-size: 1em;
@@ -81,10 +94,7 @@
 	 height: 2.5em;
 	 padding: 0;
 }
- .controllers label {
-	 display: block;
-	 font-style: normal; /* explicitly set to normal */
-}
+
  .controllers label + label {
 	 margin-top: 0.5em;
 }
@@ -94,14 +104,19 @@
 }
  .controllers .buttons button {
 	 font-size: 1em;
-	 font-family: 'Yellowtail', sans-serif; /* Changed to sans-serif for normal style */
+	 font-family: 'Roboto', sans-serif; /* Roboto for buttons */
 	 background: none;
 	 border: 1px solid #fff;
 	 display: inline-block;
 	 padding: 0.5em;
 	 margin: 0.25em;
 	 font-style: normal; /* explicitly set to normal */
+	 cursor: pointer; /* Indicate button is clickable */
 }
+ .controllers .buttons button:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Add a slight hover effect */
+}
+
  @media (max-width: 1200px) {
 	 .container {
 		 width: 90%;

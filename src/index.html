@@ -7,56 +7,55 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
     <div class="container">
-
-    <div class="controllers">
+      <div class="controllers">
         <div class="control">
-            Parts<br>
-            <span class="valueDisplay" id="partsValue">12</span>
-            <input class="input" type="range" name="parts" min="2" max="24" step="2" value="12">
+          <label for="parts">Parts</label><br>
+          <span class="valueDisplay" id="partsValue">12</span>
+          <input class="input" type="range" name="parts" id="parts" min="2" max="24" step="2" value="12">
         </div>
 
         <div class="control">
-            Color<br>
-            <input class="color" type="color" name="color" value="#ff0000">
+          <label for="color">Color</label><br>
+          <input class="color" type="color" name="color" id="color" value="#ff0000">
         </div>
 
         <div class="control">
-            Line width<br>
-            <span class="valueDisplay" id="lineWidthValue">2</span>
-            <input class="input" type="range" name="width" min="1" max="10" step="1" value="2">
+          <label for="width">Line width</label><br>
+          <span class="valueDisplay" id="lineWidthValue">2</span>
+          <input class="input" type="range" name="width" id="width" min="1" max="10" step="1" value="2">
         </div>
 
         <div class="control">
-            <label>
-                <input type="checkbox" onchange="setGrid(this);" checked>
-                Grid
-            </label>
-            <label>
-                <input type="checkbox" onchange="setMirrored(this);" checked>
-                Mirrored
-            </label>
+          <label>
+            <input type="checkbox" onchange="setGrid(this);" checked id="gridCheckbox">
+            Grid
+          </label>
+          <label>
+            <input type="checkbox" onchange="setMirrored(this);" checked id="mirroredCheckbox">
+            Mirrored
+          </label>
         </div>
 
         <div class="buttons">
-            <button onclick="clearCanvas();">
-                <i class="fas fa-trash"></i>
-                Clear
-            </button>
-            <button onclick="download()">
-                <i class="fas fa-save"></i>
-                Save
-            </button>
+          <button onclick="clearCanvas();">
+            <i class="fas fa-trash"></i>
+            Clear
+          </button>
+          <button onclick="download()">
+            <i class="fas fa-save"></i>
+            Save
+          </button>
         </div>
-    </div>
+      </div>
 
-    <div class="mandala">
+      <div class="mandala">
         <canvas class="draw"></canvas>
         <canvas class="base show"></canvas>
+      </div>
     </div>
-</div>
-  </head>
-  <body>
     <script src="script.js"></script>
   </body>
 </html>
