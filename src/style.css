@@ -16,12 +16,9 @@
 	 position: relative;
 	 width: 1200px;
 	 height: 800px;
-    display: flex; /* Add flex display to container */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
 }
  .mandala {
-	 position: relative;
+	 position: absolute;
 	 top: 0;
 	 left: 25px;
 	 width: 800px;
@@ -29,16 +26,14 @@
 	 background-color: white;
 	 border-radius: 50%;
 	 box-shadow: 5px 5px 10px #bbb;
-    max-width: 95vw; /* Limit width to viewport width */
-    max-height: 95vw; /* Keep aspect ratio, limit height to viewport width */
 }
  .mandala .base {
 	 pointer-events: none;
 	 position: absolute;
 	 left: 0;
 	 top: 0;
-	 width: 100%; /* Use 100% to fill parent */
-	 height: 100%; /* Use 100% to fill parent */
+	 width: 800px;
+	 height: 800px;
 	 border-radius: 50%;
 	 opacity: 0;
 	 transition: opacity 0.5s;
@@ -51,8 +46,8 @@
 	 position: absolute;
 	 left: 0;
 	 top: 0;
-	 width: 100%; /* Use 100% to fill parent */
-	 height: 100%; /* Use 100% to fill parent */
+	 width: 800px;
+	 height: 800px;
 	 border-radius: 50%;
 }
  .controllers {
@@ -65,7 +60,6 @@
 	 border-radius: 4px;
 	 width: 1200px;
 	 user-select: none;
-    margin-top: 1em; /* Add some top margin */
 }
  .controllers .control {
 	 font-size: 1.25em;
