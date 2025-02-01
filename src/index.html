@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width">
     <title>Mandala Maker</title>
 
+    <!-- Favicon -->
+    <link rel="icon" href="">
+
     <!-- Open Graph meta tags for WhatsApp preview -->
     <meta property="og:title" content="Mandala Maker - Create Beautiful Mandalas Online">
     <meta property="og:description" content="Design your own unique mandalas with this online tool. Customize parts, colors, and line width.">
@@ -16,15 +19,23 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
 
     <script>
-      // Dynamically set the og:image content URL
+      // Dynamically set the favicon and og:image content URL
       document.addEventListener('DOMContentLoaded', function() {
-        var baseUrl = window.location.origin; // Gets the base URL of the website (e.g., http://localhost:5173 or https://yourdomain.com)
+        var baseUrl = window.location.origin; // Gets the base URL of the website
         var imagePath = '/src/mandala-maker.png'; // Path to your image relative to the website root
         var imageUrl = baseUrl + imagePath;
+
+        console.log("Generated og:image URL:", imageUrl); // Log the URL to console
 
         var ogImageMeta = document.querySelector('meta[property="og:image"]');
         if (ogImageMeta) {
           ogImageMeta.setAttribute('content', imageUrl);
+        }
+
+        // Set favicon dynamically
+        var faviconLink = document.querySelector('link[rel="icon"]');
+        if (faviconLink) {
+          faviconLink.setAttribute('href', imageUrl);
         }
       });
     </script>
