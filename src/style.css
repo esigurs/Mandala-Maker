@@ -3,7 +3,7 @@
         padding: 0;
         margin: 0;
         box-sizing: border-box;
-        touch-action: none; /* Disable touch actions on all elements */
+        touch-action: none;
     }
     body {
         font-family: 'Roboto', sans-serif;
@@ -14,7 +14,7 @@
         align-items: center;
         justify-content: flex-start;
         color: white;
-        overflow: hidden; /* Prevent body scrolling */
+        overflow: hidden;
     }
 
     h1 {
