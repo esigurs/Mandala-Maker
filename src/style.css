@@ -3,6 +3,7 @@
         padding: 0;
         margin: 0;
         box-sizing: border-box;
+        touch-action: none; /* Disable touch actions on all elements */
     }
     body {
         font-family: 'Roboto', sans-serif;
@@ -13,6 +14,7 @@
         align-items: center;
         justify-content: flex-start;
         color: white;
+        overflow: hidden; /* Prevent body scrolling */
     }
 
     h1 {
@@ -25,12 +27,12 @@
     .container {
         position: relative;
         width: 1200px;
-        height: auto; /* Changed height to auto */
+        height: auto;
         max-width: 100%;
-        max-height: calc(100vh - 20px); /* Limit container height */
+        max-height: calc(100vh - 20px);
         padding: 0;
         box-sizing: border-box;
-        overflow: hidden; /* Hide any potential overflow */
+        overflow: hidden;
     }
     .mandala {
         position: relative;
@@ -80,22 +82,21 @@
     }
     .controllers .control {
         font-size: 1.25em;
-        display: block;
         width: 100%;
         padding: 1em;
         border-bottom: 1px solid #fff;
         box-sizing: border-box;
+        text-align: center;
     }
     .controllers label {
       font-family: 'Roboto', sans-serif;
-        display: block;
+        display: inline;
         font-style: normal;
+        margin-left: 0.5em;
     }
     .controllers .valueDisplay {
       font-family: 'Roboto', sans-serif;
-      display: block;
-      text-align: center;
-      margin-bottom: 0.5em;
+      display: inline;
       font-size: 1em;
       font-style: normal;
     }
@@ -107,6 +108,8 @@
         font-style: normal;
       color: black;
       box-sizing: border-box;
+      margin-top: 0.5em;
+      display: block;
     }
     .controllers .color {
         font-size: 1em;
@@ -171,15 +174,15 @@
 
     /* Settings Panel Styles */
     .controllers .settings {
-      display: none; /* Initially hidden */
+      display: none;
       overflow: hidden;
-      transition: max-height 0.3s ease; /* Smooth transition for max-height */
-      max-height: 0; /* Initially collapsed */
+      transition: max-height 0.3s ease;
+      max-height: 0;
     }
 
     .controllers .settings.open {
-      display: block; /* Make settings visible */
-      max-height: 500px; /* Adjust as needed to accommodate all settings */
+      display: block;
+      max-height: 500px;
     }
 
     /* Media Queries for Mobile Friendliness */
@@ -187,9 +190,9 @@
       .container {
         width: 100%;
         padding: 0;
-        height: auto; /* Ensure height adjusts to content */
-        max-height: 100vh; /* Limit height to viewport height */
-        overflow: hidden; /* Prevent scrolling */
+        height: auto;
+        max-height: 100vh;
+        overflow: hidden;
       }
       .mandala {
         width: 95vw;
@@ -207,12 +210,13 @@
         border: none;
         background-color: #111;
         padding: 1em;
-      }
-      .controllers .control {
+    }
+    .controllers .control {
         font-size: 1em;
         padding: 0.75em 0.5em;
         border-bottom: 1px solid #333;
-      }
+        text-align: center;
+    }
       .controllers .buttons {
         text-align: center;
         padding: 1em 0;
@@ -234,7 +238,7 @@
             padding: 0.5em 0.3em;
         }
         .mandala {
-          width: 98vw; /* Slightly larger on smaller screens */
+          width: 98vw;
           height: 98vw;
         }
     }

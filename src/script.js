@@ -38,6 +38,7 @@ function _(e, all=false) {
 
     // Function to get X, Y coordinates from mouse or touch event
     function getXY(e) {
+        e.preventDefault(); // Prevent default touch behavior (scrolling, etc.)
         rect = draw.getBoundingClientRect();
         let clientX, clientY;
 
@@ -56,14 +57,13 @@ function _(e, all=false) {
     }
 
     // Event listeners for mouse and touch interaction
-    document.addEventListener('mousedown', getXY);
-    document.addEventListener('touchstart', getXY);
-
-    document.addEventListener('mouseup', function() { rect = false; });
-    document.addEventListener('touchend', function() { rect = false; });
+    draw.addEventListener('mousedown', getXY);
+    draw.addEventListener('touchstart', getXY, { passive: false }); // Add passive: false
+    draw.addEventListener('mouseup', function() { rect = false; });
+    draw.addEventListener('touchend', function() { rect = false; });
 
     draw.addEventListener('mousemove', drawCanvas);
-    draw.addEventListener('touchmove', drawCanvas);
+    draw.addEventListener('touchmove', drawCanvas, { passive: false }); // Add passive: false
 
     // Input event listener for parts slider
     _('[name="parts"]').addEventListener('input', function(e) {
@@ -125,6 +125,7 @@ function _(e, all=false) {
 
     // Function to draw on the canvas based on mouse/touch move
     function drawCanvas(e) {
+        e.preventDefault(); // Prevent default touch behavior
         if (!rect) return; // Exit if not drawing (mouse/touch not down)
 
         let thisX, thisY;
