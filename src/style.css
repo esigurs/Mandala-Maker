@@ -10,8 +10,8 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        align-items: center; /* Center items horizontally */
-        justify-content: flex-start; /* Align content to the top */
+        align-items: center;
+        justify-content: flex-start;
         color: white;
     }
 
@@ -19,16 +19,18 @@
       text-align: center;
       padding: 10px 0;
       width: 100%;
-      margin-bottom: 0; /* Remove bottom margin -  good practice, but not the main fix */
+      margin-bottom: 0;
     }
 
     .container {
         position: relative;
         width: 1200px;
-        height: 800px;
+        height: auto; /* Changed height to auto */
         max-width: 100%;
-        padding: 0; /* Remove container padding.  THIS IS KEY */
+        max-height: calc(100vh - 20px); /* Limit container height */
+        padding: 0;
         box-sizing: border-box;
+        overflow: hidden; /* Hide any potential overflow */
     }
     .mandala {
         position: relative;
@@ -74,7 +76,7 @@
         width: 400px;
         max-width: 100%;
         box-sizing: border-box;
-        margin: 0 auto; /*  Keep centered */
+        margin: 0 auto;
     }
     .controllers .control {
         font-size: 1.25em;
@@ -184,21 +186,23 @@
     @media (max-width: 768px) {
       .container {
         width: 100%;
-        padding: 0; /* Remove padding on mobile too */
-        height: auto;
+        padding: 0;
+        height: auto; /* Ensure height adjusts to content */
+        max-height: 100vh; /* Limit height to viewport height */
+        overflow: hidden; /* Prevent scrolling */
       }
       .mandala {
         width: 95vw;
         height: 95vw;
         max-width: none;
         max-height: none;
-        margin-bottom: 0; /* Remove bottom margin */
+        margin-bottom: 0;
         border-radius: 0;
       }
       .controllers {
         width: 100%;
         max-width: none;
-        margin-top: 0; /* Remove top margin */
+        margin-top: 0;
         border-radius: 0;
         border: none;
         background-color: #111;
@@ -221,13 +225,17 @@
         width: 100%;
       }
       h1 {
-        margin-bottom: 0; /* Consistent across all sizes */
+        margin-bottom: 0;
       }
     }
     @media (max-width: 600px) {
         .controllers .control {
             font-size: 0.9em;
             padding: 0.5em 0.3em;
+        }
+        .mandala {
+          width: 98vw; /* Slightly larger on smaller screens */
+          height: 98vw;
         }
     }
     /* Adjustments for very small screens if needed */
