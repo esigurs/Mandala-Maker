@@ -1,219 +1,238 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
- * {
-	 padding: 0;
-	 margin: 0 auto;
-	 box-sizing: border-box;
-}
- body {
-	 font-family: 'Roboto', sans-serif;
-	 background-color: #000;
-	 min-height: 100vh;
-	 display: flex;
-	 flex-direction: column; /* Arrange items vertically */
-	 justify-content: space-between; /* Space out header, content, and footer */
-	 align-items: center;
-  color: white;
-}
- h1 {
-  text-align: center; /* Center the text */
-  padding: 10px 0; /* Add some padding above and below */
-  width: 100%; /* Full width header/footer */
-}
- .container {
-	 position: relative;
-	 width: 1200px;
-	 height: 800px;
-  max-width: 100%; /* Ensure container does not exceed screen width */
-  padding: 20px; /* Add padding around the container */
-  box-sizing: border-box; /* Include padding in width calculation */
-}
- .mandala {
-	 position: relative; /* Changed from absolute to relative */
-	 top: 0;
-	 left: 0; /* Adjust left to 0 */
-	 width: 800px;
-	 height: 800px;
-	 background-color: white;
-	 box-shadow: 5px 5px 10px #bbb;
-  max-width: 100%; /* Ensure mandala does not exceed container width */
-  display: block; /* Make it a block element to take full width */
-  margin: 0 auto; /* Center the mandala */
-}
- .mandala .base {
-	 pointer-events: none;
-	 position: absolute;
-	 left: 0;
-	 top: 0;
-	 width: 100%; /* Base canvas to 100% width */
-	 height: 100%; /* Base canvas to 100% height */
-	 opacity: 0;
-	 transition: opacity 0.5s;
-}
- .mandala .base.show {
-	 opacity: 1;
-}
- .mandala .draw {
-	 cursor: crosshair;
-	 position: absolute;
-	 left: 0;
-	 top: 0;
-	 width: 100%; /* Draw canvas to 100% width */
-	 height: 100%; /* Draw canvas to 100% height */
-}
- .controllers {
-	 position: relative; /* Changed from absolute to relative */
-	 top: auto; /* Adjust top to auto */
-	 left: auto; /* Adjust left to auto */
-	 transform: none;
-	 padding: 1em;
-	 border: 1px solid #fff;
-	 border-radius: 4px;
-	 width: 400px; /* Set a base width for controllers */
-  max-width: 100%; /* Ensure controllers do not exceed container width */
-  box-sizing: border-box; /* Include padding and border in width */
-  margin: 20px auto 0; /* Center below mandala and add top margin */
-}
- .controllers .control {
-	 font-size: 1.25em;
-	 display: block;
-	 width: 100%;
-	 padding: 1em;
-	 border-bottom: 1px solid #fff;
-  box-sizing: border-box; /* Ensure padding and border are included in control width */
-}
- .controllers label {
-  font-family: 'Roboto', sans-serif;
-	 display: block;
-	 font-style: normal;
-}
- .controllers .valueDisplay {
-  font-family: 'Roboto', sans-serif;
-  display: block;
-  text-align: center;
-  margin-bottom: 0.5em;
-  font-size: 1em;
-  font-style: normal;
-}
- .controllers .input {
-	 font-family: sans-serif;
-	 width: 100%;
-	 font-size: 1em;
-	 text-align: center;
-	 font-style: normal;
-  color: black;
-  box-sizing: border-box; /* Ensure padding and border are included in input width */
-}
- .controllers .color {
-	 font-size: 1em;
-	 width: 100%;
-	 height: 2.5em;
-	 padding: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: 1px solid #fff;
-  background-color: #333;
-  border-radius: 5px;
-  cursor: pointer;
-  box-sizing: border-box; /* Ensure padding and border are included in color picker width */
-}
-.controllers .color::-webkit-color-swatch-wrapper {
-  padding: 2px;
-}
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #000;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center items horizontally */
+        justify-content: flex-start; /* Align content to the top */
+        color: white;
+    }
 
-.controllers .color::-webkit-color-swatch {
-  border: none;
-  border-radius: 3px;
-}
+    h1 {
+      text-align: center;
+      padding: 10px 0;
+      width: 100%;
+      margin-bottom: 0; /* Remove bottom margin -  good practice, but not the main fix */
+    }
 
-.controllers .color::-moz-color-swatch-wrapper {
-  padding: 2px;
-}
+    .container {
+        position: relative;
+        width: 1200px;
+        height: 800px;
+        max-width: 100%;
+        padding: 0; /* Remove container padding.  THIS IS KEY */
+        box-sizing: border-box;
+    }
+    .mandala {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 800px;
+        height: 800px;
+        background-color: white;
+        box-shadow: 5px 5px 10px #bbb;
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+    .mandala .base {
+        pointer-events: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
+    .mandala .base.show {
+        opacity: 1;
+    }
+    .mandala .draw {
+        cursor: crosshair;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .controllers {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        padding: 1em;
+        border: 1px solid #fff;
+        border-radius: 4px;
+        width: 400px;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin: 0 auto; /*  Keep centered */
+    }
+    .controllers .control {
+        font-size: 1.25em;
+        display: block;
+        width: 100%;
+        padding: 1em;
+        border-bottom: 1px solid #fff;
+        box-sizing: border-box;
+    }
+    .controllers label {
+      font-family: 'Roboto', sans-serif;
+        display: block;
+        font-style: normal;
+    }
+    .controllers .valueDisplay {
+      font-family: 'Roboto', sans-serif;
+      display: block;
+      text-align: center;
+      margin-bottom: 0.5em;
+      font-size: 1em;
+      font-style: normal;
+    }
+    .controllers .input {
+        font-family: sans-serif;
+        width: 100%;
+        font-size: 1em;
+        text-align: center;
+        font-style: normal;
+      color: black;
+      box-sizing: border-box;
+    }
+    .controllers .color {
+        font-size: 1em;
+        width: 100%;
+        height: 2.5em;
+        padding: 0;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border: 1px solid #fff;
+      background-color: #333;
+      border-radius: 5px;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+    .controllers .color::-webkit-color-swatch-wrapper {
+      padding: 2px;
+    }
 
-.controllers .color::-moz-color-swatch {
-  border: none;
-  border-radius: 3px;
-}
+    .controllers .color::-webkit-color-swatch {
+      border: none;
+      border-radius: 3px;
+    }
+
+    .controllers .color::-moz-color-swatch-wrapper {
+      padding: 2px;
+    }
+
+    .controllers .color::-moz-color-swatch {
+      border: none;
+      border-radius: 3px;
+    }
 
 
- .controllers label + label {
-	 margin-top: 0.5em;
-}
- .controllers .buttons {
-	 padding: 1em 0;
-	 text-align: center; /* Center buttons */
-  display: flex; /* Use flexbox for buttons */
-  flex-direction: column; /* Stack buttons vertically */
-  align-items: stretch; /* Make buttons stretch to full width */
-}
- .controllers .buttons button {
-	 font-size: 1em;
-	 font-family: 'Roboto', sans-serif;
-	 background: none;
-	 border: 1px solid #fff;
-	 display: block; /* Make buttons block elements */
-	 padding: 0.5em;
-	 margin: 0.5em 0; /* Add vertical margin and remove horizontal margin */
-	 font-style: normal;
-	 cursor: pointer;
-  color: white;
-  box-sizing: border-box; /* Ensure padding and border are included in button width */
-  width: 100%; /* Make buttons full width */
-}
- .controllers .buttons button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
+    .controllers label + label {
+        margin-top: 0.5em;
+    }
+    .controllers .buttons {
+      padding: 0.5em 0;
+        text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .controllers .buttons button {
+        font-size: 1em;
+        font-family: 'Roboto', sans-serif;
+        background: none;
+        border: 1px solid #fff;
+        display: block;
+        padding: 0.5em;
+        margin: 0.5em 0;
+        font-style: normal;
+        cursor: pointer;
+      color: white;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .controllers .buttons button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
 
-/* Media Queries for Mobile Friendliness */
- @media (max-width: 768px) { /* Adjust breakpoint as needed */
-  .container {
-    width: 100%; /* Full width on smaller screens */
-    padding: 10px; /* Add some padding around */
-    height: auto; /* Adjust height to content */
-  }
-  .mandala {
-    width: 95vw; /* Mandala takes most of the width */
-    height: 95vw; /* Keep it square */
-    max-width: none; /* Remove max width */
-    max-height: none; /* Remove max height */
-    margin-bottom: 20px; /* Space below mandala */
-    border-radius: 0; /* Square corners for mobile */
-  }
-  .controllers {
-    width: 100%; /* Full width controllers */
-    max-width: none; /* Remove max width */
-    margin-top: 20px; /* Space above controllers */
-    border-radius: 0; /* Square corners for mobile */
-    border: none; /* Remove border for cleaner look */
-    background-color: #111; /* Darker background for controllers */
-    padding: 1em;
-  }
-  .controllers .control {
-    font-size: 1em; /* Adjust font size */
-    padding: 0.75em 0.5em;
-    border-bottom: 1px solid #333; /* Darker border for controls */
-  }
-  .controllers .buttons {
-    text-align: center; /* Center buttons on mobile */
-    padding: 1em 0;
-  }
-  .controllers .buttons button {
-    font-size: 1em; /* Adjust button font size */
-    padding: 0.5em 1em; /* Adjust button padding */
-    margin: 0.5em 0; /* Vertical margin for stacked buttons */
-    display: block; /* Stack buttons on mobile */
-    width: 100%; /* Full width buttons */
-  }
-}
- @media (max-width: 600px) {
-	 .controllers .control {
-		 font-size: 0.9em;
-		 padding: 0.5em 0.3em;
-	}
-}
-/* Adjustments for very small screens if needed */
-@media (max-width: 320px) {
-  .controllers .control {
-    font-size: 0.8em; /* Further reduce font size for very small screens */
-  }
-}
+    /* Settings Panel Styles */
+    .controllers .settings {
+      display: none; /* Initially hidden */
+      overflow: hidden;
+      transition: max-height 0.3s ease; /* Smooth transition for max-height */
+      max-height: 0; /* Initially collapsed */
+    }
+
+    .controllers .settings.open {
+      display: block; /* Make settings visible */
+      max-height: 500px; /* Adjust as needed to accommodate all settings */
+    }
+
+    /* Media Queries for Mobile Friendliness */
+    @media (max-width: 768px) {
+      .container {
+        width: 100%;
+        padding: 0; /* Remove padding on mobile too */
+        height: auto;
+      }
+      .mandala {
+        width: 95vw;
+        height: 95vw;
+        max-width: none;
+        max-height: none;
+        margin-bottom: 0; /* Remove bottom margin */
+        border-radius: 0;
+      }
+      .controllers {
+        width: 100%;
+        max-width: none;
+        margin-top: 0; /* Remove top margin */
+        border-radius: 0;
+        border: none;
+        background-color: #111;
+        padding: 1em;
+      }
+      .controllers .control {
+        font-size: 1em;
+        padding: 0.75em 0.5em;
+        border-bottom: 1px solid #333;
+      }
+      .controllers .buttons {
+        text-align: center;
+        padding: 1em 0;
+      }
+      .controllers .buttons button {
+        font-size: 1em;
+        padding: 0.5em 1em;
+        margin: 0.5em 0;
+        display: block;
+        width: 100%;
+      }
+      h1 {
+        margin-bottom: 0; /* Consistent across all sizes */
+      }
+    }
+    @media (max-width: 600px) {
+        .controllers .control {
+            font-size: 0.9em;
+            padding: 0.5em 0.3em;
+        }
+    }
+    /* Adjustments for very small screens if needed */
+    @media (max-width: 320px) {
+      .controllers .control {
+        font-size: 0.8em;
+      }
+    }
